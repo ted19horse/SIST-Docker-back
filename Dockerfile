@@ -7,7 +7,7 @@ WORKDIR /app
 # 프로젝트 파일 복사
 COPY . .
 # gradlew 파일 실행 권한 설정
-RUN chomod +x ./gradlew
+RUN chmod +x ./gradlew
 # 프로젝트 빌드
 RUN ./gradlew clean build --no-daemon
 
