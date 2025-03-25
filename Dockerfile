@@ -7,7 +7,7 @@ WORKDIR /app
 # 프로젝트 파일 복사
 COPY . .
 # 프로젝트 빌드
-RUN gradle clean build --no-daemon
+RUN gradlew clean build --no-daemon
 
 # 빌드된 JAR 파일을 실행할 이미지 설정
 FROM openjdk:17-jdk-slim
@@ -18,4 +18,4 @@ COPY ./build/libs/docker0320spring-0.0.1-SNAPSHOT.jar app.jar
 # 애플리케이션 실행
 ENTRYPOINT ["java", "-jar", "app.jar"]
 # 컨테이너 내부 포트 노출
-EXPOSE 8080
+# EXPOSE 8080
