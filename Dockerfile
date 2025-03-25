@@ -9,14 +9,14 @@ COPY . .
 # gradlew 파일 실행 권한 설정
 RUN chmod +x ./gradlew
 # 프로젝트 빌드 (의존성 리프레시 옵션 제거)
-RUN ./gradlew clean build --no-daemon
+RUN ./gradlew clean build --no-daemon --stacktrace --info && ls -la build/libs/
 
 # 빌드된 JAR 파일을 실행할 이미지 설정
 FROM openjdk:17-jdk-slim
 # 작업 디렉토리 설정
 WORKDIR /app
 # 빌드된 JAR 파일 복사
-ARG JAR_FILE=build/libs/docker0320spring-0.0.1-SNAPSHOT.jar
+ARG JAR_FILE=./build/libs/*[^plain].jar
 # 애플리케이션 JAR 파일 복사 (프로젝트에서 빌드된 JAR 파일 경로에 맞게 수정)
 COPY ${JAR_FILE} app.jar
 # 애플리케이션 실행
