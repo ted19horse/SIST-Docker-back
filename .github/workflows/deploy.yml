@@ -30,9 +30,10 @@ jobs:
             REPO_DIR="/home/ubuntu/backend/SIST-Docker-back"
             
             if [ -d "$REPO_DIR" ]; then
-              # 디렉토리가 존재하면 업데이트
-              echo "프로젝트 디렉토리가 존재합니다. 업데이트를 진행합니다."
+              # 디렉토리가 존재하면 모든 로컬 변경사항 폐기 후 업데이트
+              echo "프로젝트 디렉토리가 존재합니다. 강제 업데이트를 진행합니다."
               cd "$REPO_DIR"
+              git reset --hard
               git fetch
               git pull origin main
             else
