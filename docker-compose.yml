@@ -31,11 +31,6 @@ services:
     depends_on:
       - mysql8
     restart: always
-    # Gradle 캐시 볼륨 추가가
-    volumes:
-      - gradle-cache:/root/.gradle
 networks:
   sist_net:
     driver: bridge
-volumes:
-  gradle-cache:
