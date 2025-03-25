@@ -2,10 +2,10 @@ services:
   mysql8:
     image: mysql:8.0
     # environment:
-      # - MYSQL_ROOT_PASSWORD=1111 #루트계정의 비번
-      # - MYSQL_DATABASE=test_db #생성할 스키마(DB)
-      # - MYSQL_USER=test_admin #생성할 계정
-      # - MYSQL_PASSWORD=1111 #생성할 계정의 비번
+    # - MYSQL_ROOT_PASSWORD=1111 #루트계정의 비번
+    # - MYSQL_DATABASE=test_db #생성할 스키마(DB)
+    # - MYSQL_USER=test_admin #생성할 계정
+    # - MYSQL_PASSWORD=1111 #생성할 계정의 비번
     networks:
       - sist_net
     volumes:
@@ -18,6 +18,7 @@ services:
     restart: always
   backend:
     build:
+      context: ./
       dockerfile: Dockerfile
     container_name: backend
     networks:
