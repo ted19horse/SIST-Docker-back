@@ -16,13 +16,6 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.PRIVATE_KEY }}
 
-      - name: SSH 연결 유지 설정
-        run: |
-          mkdir -p ~/.ssh
-          echo "Host *" > ~/.ssh/config
-          echo "  ServerAliveInterval 60" >> ~/.ssh/config
-          echo "  ServerAliveCountMax 10" >> ~/.ssh/config
-
       - name: 원격 EC2 서버에서 Git Pull 및 Docker 실행
         run: |
           ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.HOST }} << 'EOF'
@@ -50,10 +43,16 @@ jobs:
             else
               echo "기존 db 디렉토리가 존재합니다. 볼륨 데이터를 보존합니다."
             fi
+
+            
+            # 사용자를 Docker 그룹에 추가
+            sudo usermod -aG docker $USER
             
             # Docker 관련 권한 설정
             sudo chmod -R 777 "$REPO_DIR"
             sudo chmod 666 /var/run/docker.sock
+
+
             
             # 네트워크 존재 여부 확인 및 생성
             if ! docker network ls | grep -q sist_net; then
@@ -62,7 +61,6 @@ jobs:
             fi
             
             # Docker Compose 실행
-            cd "$REPO_DIR"
             docker-compose down
             docker-compose up -d --build
           EOF
