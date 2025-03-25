@@ -1,0 +1,14 @@
+## 개발용
+server:
+  port: 8080
+spring:
+  output:
+    ansi:
+      enabled: always
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://mysql8:3306/test_db
+    username: test_admin
+    password: 1111
+#custom:
+#  fileDirPath: /usr/work
