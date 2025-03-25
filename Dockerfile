@@ -16,7 +16,7 @@ FROM openjdk:17-jdk-slim
 # 작업 디렉토리 설정
 WORKDIR /app
 # 빌드된 JAR 파일 복사
-ARG JAR_FILE=./build/libs/docker0320spring-0.0.1-SNAPSHOT.jar
+ARG JAR_FILE=build/libs/docker0320spring-0.0.1-SNAPSHOT.jar
 # 애플리케이션 JAR 파일 복사 (프로젝트에서 빌드된 JAR 파일 경로에 맞게 수정)
 COPY ${JAR_FILE} app.jar
 # 애플리케이션 실행
