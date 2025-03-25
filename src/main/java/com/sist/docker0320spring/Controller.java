@@ -23,7 +23,7 @@ public class Controller {
   public Map<String, Object> sampleAll() {
     Map<String, Object> map = new HashMap<>();
 
-    List<Entity> list = service.getList();
+    List<SampleT> list = service.getList();
     map.put("list", list);
 
     return map;

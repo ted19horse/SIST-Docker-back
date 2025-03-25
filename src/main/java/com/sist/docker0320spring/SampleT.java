@@ -1,21 +1,19 @@
 package com.sist.docker0320spring;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
 
 @jakarta.persistence.Entity
+@Table(name = "sample_t")
 @Getter @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
 @ToString
-public class Entity {
+public class SampleT {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long idx;

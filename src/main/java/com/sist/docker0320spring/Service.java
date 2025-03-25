@@ -9,7 +9,7 @@ import java.util.List;
 public class Service {
   private final Repository repository;
 
-  public List<Entity> getList() {
+  public List<SampleT> getList() {
     return repository.findAll();
   }
 }
