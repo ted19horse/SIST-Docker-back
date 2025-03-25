@@ -1,0 +1,35 @@
+services:
+  mysql8:
+    image: mysql:8.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=1111 #루트계정의 비번
+      - MYSQL_DATABASE=test_db #생성할 스키마(DB)
+      - MYSQL_USER=test_admin #생성할 계정
+      - MYSQL_PASSWORD=1111 #생성할 계정의 비번
+    networks:
+      - sist_net
+    volumes:
+      - ./db/conf.d:/etc/mysql/conf.d
+      - ./db/data:/var/lib/mysql
+      - ./db/initdb.d:/docker-entrypoint-initdb.d
+    env_file: .env
+    ports:
+      - '3307:3306'
+    restart: always
+  backend:
+    build:
+      dockerfile: Dockerfile
+    container_name: backend
+    networks:
+      - sist_net
+    ports:
+      - '8080:8080'
+    #environment:
+    # - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.MyS QL8Dialect
+    # - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    depends_on:
+      - mysql8
+    restart: always
+networks:
+  sist_net:
+    driver: bridge
