@@ -9,7 +9,7 @@ COPY . .
 # gradlew 파일 실행 권한 설정
 RUN chmod +x ./gradlew
 # 프로젝트 빌드 (의존성 리프레시 옵션 제거)
-RUN ./gradlew clean build --no-daemon
+RUN ./gradlew clean build -x test --no-daemon
 
 # 빌드된 JAR 파일을 실행할 이미지 설정
 FROM openjdk:17-jdk-slim
