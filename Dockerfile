@@ -6,8 +6,10 @@ FROM gradle:7.2.0-jdk as builder
 WORKDIR /app
 # 프로젝트 파일 복사
 COPY . .
+# gradlew 파일 실행 권한 설정
+RUN chomod +x ./gradlew
 # 프로젝트 빌드
-RUN gradlew clean build --no-daemon
+RUN ./gradlew clean build --no-daemon
 
 # 빌드된 JAR 파일을 실행할 이미지 설정
 FROM openjdk:17-jdk-slim
